@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: oms-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: oms-service
+  template:
+    metadata:
+      labels:
+        app: oms-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3006"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: oms-service
+          image: vendettistudios/oms-service:latest
+          ports:
+            - containerPort: 3006
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

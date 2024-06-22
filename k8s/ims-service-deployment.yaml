@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ims-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: ims-service
+  template:
+    metadata:
+      labels:
+        app: ims-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3005"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: ims-service
+          image: vendettistudios/ims-service:latest
+          ports:
+            - containerPort: 3005
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"

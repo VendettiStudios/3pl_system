@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: erp-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: erp-service
+  template:
+    metadata:
+      labels:
+        app: erp-service
+      annotations:
+        prometheus.io/scrape: "true"
+        prometheus.io/port: "3003"
+        prometheus.io/path: "/metrics"
+    spec:
+      containers:
+        - name: erp-service
+          image: vendettistudios/erp-service:latest
+          ports:
+            - containerPort: 3003
+          resources:
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
