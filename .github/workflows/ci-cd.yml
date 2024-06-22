@@ -1,0 +1,32 @@
+name: CI/CD Pipeline
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [BIS/nest-bis/bis-service, CRM/nest-crm/crm-service, ERP/nest-erp/erp-service, TMS/nest-tms/tms-service, WMS/IMS/nest-ims/ims-service, WMS/OMS/nest-oms/oms-service, WMS/WO/nest-wo/wo-service]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '22'
+      - run: npm install
+        working-directory: ${{ matrix.service }}
+      - run: npm test
+        working-directory: ${{ matrix.service }}
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Deploy to Kubernetes
+        run: |
+          kubectl apply -f k8s/deployment.yaml
