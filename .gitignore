@@ -1,0 +1,38 @@
+# Node.js modules
+node_modules/
+
+# Python compiled files
+__pycache__/
+*.py[cod]
+
+# macOS system files
+.DS_Store
+
+# Environment variable files
+.env
+
+# Log files
+*.log
+
+# Build directories
+build/
+dist/
+
+# Docker files
+docker-compose.override.yml
+.docker/
+
+# IntelliJ IDEA project files
+.idea/
+
+# Visual Studio Code workspace settings
+.vscode/
+
+# Coverage reports
+coverage/
+
+# Database files
+*.sqlite3
+
+# Local configuration files
+config/local/
