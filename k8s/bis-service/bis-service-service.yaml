@@ -6,6 +6,6 @@ spec:
   selector:
     app: bis-service
   ports:
-    - protocol: TCP
-      port: 3001
-      targetPort: 3001
+  - protocol: TCP
+    port: 80
+    targetPort: 3000

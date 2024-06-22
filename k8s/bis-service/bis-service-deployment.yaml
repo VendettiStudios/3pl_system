@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bis-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bis-service
+  template:
+    metadata:
+      labels:
+        app: bis-service
+    spec:
+      containers:
+      - name: bis-service
+        image: bis-service:latest
+        ports:
+        - containerPort: 3000
