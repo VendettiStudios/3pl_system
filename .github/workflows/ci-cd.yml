@@ -14,7 +14,14 @@ jobs:
 
     strategy:
       matrix:
-        service: [crm-service, tms-service, bis-service, erp-service, ims-service, wo-service, oms-service]
+        service: 
+          - BIS/nest-bis/bis-service
+          - IMS/nest-ims/ims-service
+          - ERP/nest-erp/erp-service
+          - TMS/nest-tms/tms-service
+          - OMS/nest-oms/oms-service
+          - CRM/nest-crm/crm-service
+          - WMS/WO/nest-wo/wo-service
 
     steps:
       - name: Checkout repository
