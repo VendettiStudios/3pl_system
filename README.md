@@ -1,3 +1,5 @@
+## RD
+
 # Warehouse 3PL Management System
 
 ## Description
@@ -53,9 +55,6 @@ See [Business Intelligence and Analytics Service README](./business-intelligence
 
 ### Integration Middleware
 See [Integration Middleware README](./integration-middleware/README.md).
-
-## Contributing
-Contributions are welcome! Please see the [CONTRIBUTING.md](./CONTRIBUTING.md) file for guidelines.
 
 ## License
 This project is licensed under the MIT License. See the [LICENSE](./LICENSE) file for details.
