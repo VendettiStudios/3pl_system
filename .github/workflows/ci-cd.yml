@@ -53,5 +53,13 @@ jobs:
         with:
           node-version: '20'
 
-      - name: Deploy to production
-        run: ./deploy.sh
+      # Add your deployment steps here
+      # Example for deploying to a server:
+      # - name: Deploy to Server
+      #   run: |
+      #     rsync -avz ./dist/ user@server:/path/to/deployment
+
+      # Example for deploying to Kubernetes:
+      # - name: Deploy to Kubernetes
+      #   run: |
+      #     kubectl apply -f k8s/
