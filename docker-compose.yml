@@ -1,89 +1,57 @@
+version: '3.10'
 services:
   bis-service:
-    build:
-      context: ./BIS/nest-bis/bis-service
+    build: ./BIS/nest-bis/bis-service
     ports:
-      - '3000:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3000"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - "3001:3000"
+    volumes:
+      - ./BIS/nest-bis/bis-service:/usr/src/app
+      - /usr/src/app/node_modules
 
   crm-service:
-    build:
-      context: ./CRM/nest-crm/crm-service
+    build: ./CRM/nest-crm/crm-service
     ports:
-      - '3001:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3001"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  ims-service:
-    build:
-      context: ./WMS/IMS/nest-ims/ims-service
-    ports:
-      - '3002:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3002"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  wo-service:
-    build:
-      context: ./WMS/WO/nest-wo/wo-service
-    ports:
-      - '3003:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3003"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - "3002:3000"
+    volumes:
+      - ./CRM/nest-crm/crm-service:/usr/src/app
+      - /usr/src/app/node_modules
 
   erp-service:
-    build:
-      context: ./ERP/nest-erp/erp-service
+    build: ./ERP/nest-erp/erp-service
     ports:
-      - '3004:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3004"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - "3003:3000"
+    volumes:
+      - ./ERP/nest-erp/erp-service:/usr/src/app
+      - /usr/src/app/node_modules
 
   tms-service:
-    build:
-      context: ./TMS/nest-tms/tms-service
+    build: ./TMS/nest-tms/tms-service
     ports:
-      - '3005:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3005"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - "3004:3000"
+    volumes:
+      - ./TMS/nest-tms/tms-service:/usr/src/app
+      - /usr/src/app/node_modules
+
+  ims-service:
+    build: ./WMS/IMS/nest-ims/ims-service
+    ports:
+      - "3005:3000"
+    volumes:
+      - ./WMS/IMS/nest-ims/ims-service:/usr/src/app
+      - /usr/src/app/node_modules
 
   oms-service:
-    build:
-      context: ./WMS/OMS/nest-oms/oms-service
+    build: ./WMS/OMS/nest-oms/oms-service
     ports:
-      - '3006:3000'
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:3006"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
-
-  nginx:
-    image: nginx:latest
-    ports:
-      - '80:80'
+      - "3006:3000"
     volumes:
-      - ./nginx.conf:/etc/nginx/nginx.conf
-    healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost"]
-      interval: 30s
-      timeout: 10s
-      retries: 3
+      - ./WMS/OMS/nest-oms/oms-service:/usr/src/app
+      - /usr/src/app/node_modules
+
+  wo-service:
+    build: ./WMS/WO/nest-wo/wo-service
+    ports:
+      - "3007:3000"
+    volumes:
+      - ./WMS/WO/nest-wo/wo-service:/usr/src/app
+      - /usr/src/app/node_modules
