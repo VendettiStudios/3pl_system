@@ -9,7 +9,7 @@ on:
       - main
 
 env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true  # Set globally
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true  # Set globally for all jobs
 
 jobs:
   build:
