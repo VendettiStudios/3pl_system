@@ -15,24 +15,14 @@ data:
       - job_name: 'prometheus'
         static_configs:
           - targets: ['localhost:9090']
-      
-      - job_name: 'kubernetes-pods'
-        kubernetes_sd_configs:
-          - role: pod
-        relabel_configs:
-          - action: labelmap
-            regex: __meta_kubernetes_pod_label_(.+)
-          - action: replace
-            source_labels: [__meta_kubernetes_pod_container_port_number]
-            target_label: __address__
-            regex: (.*)
-            replacement: $1
-          - action: replace
-            source_labels: [__meta_kubernetes_namespace]
-            target_label: kubernetes_namespace
-          - action: replace
-            source_labels: [__meta_kubernetes_pod_name]
-            target_label: kubernetes_pod_name
-          - action: replace
-            source_labels: [__meta_kubernetes_pod_label_name]
-            target_label: job
+
+      - job_name: 'microservices'
+        static_configs:
+          - targets:
+            - 'bis-service.default.svc.cluster.local:3001'
+            - 'crm-service.default.svc.cluster.local:3002'
+            - 'erp-service.default.svc.cluster.local:3003'
+            - 'tms-service.default.svc.cluster.local:3004'
+            - 'ims-service.default.svc.cluster.local:3005'
+            - 'oms-service.default.svc.cluster.local:3006'
+            - 'wo-service.default.svc.cluster.local:3007'
