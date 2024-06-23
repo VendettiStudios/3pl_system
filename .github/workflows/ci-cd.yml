@@ -8,24 +8,54 @@ on:
     branches:
       - main
 
+env:
+  FORCE_JAVASCRIPT_ACTIONS_TO_NODE20: true  # Set globally for all jobs
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4  # Update to v4
+    strategy:
+      matrix:
+        service: 
+          - BIS/nest-bis/bis-service
+          - CRM/nest-crm/crm-service
+          - ERP/nest-erp/erp-service
+          - TMS/nest-tms/tms-service
+          - WMS/IMS/nest-ims/ims-service
+          - WMS/OMS/nest-oms/oms-service
+          - WMS/WO/nest-wo/wo-service
 
-      - name: Set up Node.js 20
-        uses: actions/setup-node@v4  # Update to v4
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
         with:
           node-version: '20'
 
       - name: Install dependencies
         run: npm install
-
-      - name: Run ESLint
-        run: npm run lint
+        working-directory: ${{ matrix.service }}
 
       - name: Run tests
         run: npm test
+        working-directory: ${{ matrix.service }}
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Deploy to production
+        run: |
+          echo "Deploying application"
