@@ -1,4 +1,3 @@
-version: '3.10'
 services:
   bis-service:
     build: ./BIS/nest-bis/bis-service
