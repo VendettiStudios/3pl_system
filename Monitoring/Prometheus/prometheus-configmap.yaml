@@ -19,7 +19,7 @@ data:
       - job_name: 'microservices'
         static_configs:
           - targets:
-            - 'bis-service.default.svc.cluster.local:3001'
+            - 'bis-service.default.svc.cluster.local:3008'
             - 'crm-service.default.svc.cluster.local:3002'
             - 'erp-service.default.svc.cluster.local:3003'
             - 'tms-service.default.svc.cluster.local:3004'

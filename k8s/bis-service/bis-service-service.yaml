@@ -8,5 +8,5 @@ spec:
     app: bis-service
   ports:
     - protocol: TCP
-      port: 3001
-      targetPort: 3001
+      port: 3008
+      targetPort: 3008

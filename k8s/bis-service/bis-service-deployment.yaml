@@ -17,7 +17,7 @@ spec:
       - name: bis-service
         image: vendettistudios/bis-service:latest
         ports:
-        - containerPort: 3001
+        - containerPort: 3008
         resources:
           limits:
             cpu: "1"
