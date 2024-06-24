@@ -6,6 +6,13 @@ services:
     volumes:
       - ./BIS/nest-bis/bis-service:/usr/src/app
       - /usr/src/app/node_modules
+    depends_on:
+      - crm-service
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   crm-service:
     build: ./CRM/nest-crm/crm-service
@@ -14,6 +21,11 @@ services:
     volumes:
       - ./CRM/nest-crm/crm-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   erp-service:
     build: ./ERP/nest-erp/erp-service
@@ -22,6 +34,11 @@ services:
     volumes:
       - ./ERP/nest-erp/erp-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   tms-service:
     build: ./TMS/nest-tms/tms-service
@@ -30,6 +47,11 @@ services:
     volumes:
       - ./TMS/nest-tms/tms-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   ims-service:
     build: ./WMS/IMS/nest-ims/ims-service
@@ -38,6 +60,11 @@ services:
     volumes:
       - ./WMS/IMS/nest-ims/ims-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   oms-service:
     build: ./WMS/OMS/nest-oms/oms-service
@@ -46,6 +73,11 @@ services:
     volumes:
       - ./WMS/OMS/nest-oms/oms-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   wo-service:
     build: ./WMS/WO/nest-wo/wo-service
@@ -54,6 +86,11 @@ services:
     volumes:
       - ./WMS/WO/nest-wo/wo-service:/usr/src/app
       - /usr/src/app/node_modules
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:3000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 5
 
   nginx:
     image: nginx:latest
@@ -62,3 +99,11 @@ services:
       - "80:80"
     volumes:
       - ./nginx.conf:/etc/nginx/nginx.conf:ro
+    # depends_on:
+    #   - bis-service
+    #   - crm-service
+    #   - erp-service
+    #   - tms-service
+    #   - ims-service
+    #   - oms-service
+    #   - wo-service
